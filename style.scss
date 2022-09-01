@@ -1,0 +1,293 @@
+@font-face {
+    font-family: 'Cormorant';
+    src: local('Cormorant'), url(src/fonts/Cormorant/Cormorant-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Snippet';
+    src: local('Snippet'), url(src/fonts/Snippet/Snippet.ttf);
+}
+
+@mixin breakpoint($bp) {
+    @media screen and (max-width: $bp) {
+        @content;
+    }
+}
+
+body {
+    font-family: 'Cormorant', Sans-serif, Arial;
+    margin: 0;
+    height: 100vh;
+    background-color: #F7F3E3;
+    font-size: 100%;
+    position: relative;
+}
+
+header {
+    height: 90px;
+    background-color: #AF9164;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+
+    @include breakpoint(600px) {
+        margin-bottom: 20px;
+    }
+}
+
+.logo {
+    font-size: 48px;
+    color: #fff;
+
+    .logo__link {
+        display: flex;
+        align-items: center
+    }
+
+    .logo__text {
+        margin-left: 12px;
+    }
+
+    @include breakpoint(600px) {
+        font-size: 32px;
+    }
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    background-color: #AF9164;
+    padding: 0 32px;
+    margin-top: -45px;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+.copyright {
+    font-family: 'Cormorant', Sans-serif, Arial;
+    font-size: 24px;
+    color: #fff;
+
+    @include breakpoint(600px) {
+        font-size: 18px;
+    }
+}
+
+.copyright__highlight {
+    color: #2B2118;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 90px - 45px);
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 45px;
+}
+
+.form {
+    width: 768px;
+    height: 600px;
+    background-color: #2B2118;
+    z-index: 1;
+    padding-bottom: 30px;
+
+    @include breakpoint(600px) {
+        background-color: transparent;
+    }
+
+}
+
+.wrap {
+    padding: 38px 32px;
+}
+
+.form-header {
+    background-color: #AF9164;
+    text-align: center;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 500;
+    margin: 0;
+    padding: 4px;
+
+    @include breakpoint(600px) {
+        font-size: 24px;
+    }
+}
+
+.wrap-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.input {
+    background-color: #AF9164;
+    border: none;
+    height: 40px;
+    padding: 0 8px;
+    text-overflow: ellipsis;
+    color: #CCCCCC;
+    font-family: 'Cormorant', Sans-serif, Arial;
+    font-size: 28px;
+    font-weight: 400;
+
+
+    &::placeholder {
+        color: #CCCCCC;
+        font-family: 'Cormorant', Sans-serif, Arial;
+        font-size: 28px;
+        font-weight: 400;
+
+        @include breakpoint(600px) {
+            font-size: 20px;
+        }
+    }
+
+    @include breakpoint(600px) {
+        font-size: 20px;
+    }
+}
+
+.label,
+.label-checkbox {
+    color: #F7F3E3;
+    font-family: 'Cormorant', Sans-serif, Arial;
+    font-size: 28px;
+    font-weight: 400;
+
+    @include breakpoint(600px) {
+        color: #2B2118;
+    }
+
+    @include breakpoint(600px) {
+        font-size: 20px;
+    }
+}
+
+.wrap-checkbox {
+    position: relative;
+    display: inline-block;
+    margin-top: 28px;
+}
+
+.input-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    right: -40px;
+    margin: 0;
+
+    &:hover+.label-checkbox {
+        opacity: 0.9;
+    }
+}
+
+.label-checkbox {
+    position: relative;
+    align-items: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        background: #AF9164;
+        width: 32px;
+        height: 32px;
+        right: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+
+    }
+}
+
+.input-checkbox:checked+.label-checkbox {
+    &::after {
+        content: "";
+        position: absolute;
+        background-image: url("Cookie.svg");
+        width: 21px;
+        height: 21px;
+        right: -35px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+
+.btn {
+    font-family: "Snippet";
+    background: #6F1A07;
+    padding: 4px 32px;
+    display: block;
+    margin: 0 auto;
+    color: #F7F3E3;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+    border: 1px solid #6F1A07;
+
+    &:hover {
+        background-color: #8F3A27;
+    }
+
+    &:focus {
+        border-color: #AF9164;
+    }
+
+    @include breakpoint(600px) {
+        font-size: 20px;
+    }
+}
+
+
+
+// ANIMATIONS
+
+
+.background {
+    width: 100%;
+    height: 100%;
+}
+
+$particleSize: 48px;
+$animationDuration: 20s;
+$amount: 15;
+
+.background span {
+    width: $particleSize;
+    height: $particleSize;
+    border-radius: $particleSize;
+    backface-visibility: hidden;
+    position: absolute;
+    animation-name: move;
+    animation-duration: $animationDuration;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    background-image: url("Cookie.svg");
+
+    @for $i from 1 through $amount {
+        &:nth-child(#{$i}) {
+            top: random(100) * 1%;
+            left: random(100) * 1%;
+            animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+            animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+            transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+        }
+    }
+}
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
